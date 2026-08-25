@@ -19,7 +19,8 @@ Feature: Consultar usuario
     # Username a consultar
     Given path username
 
-    # Header requerido
+    # apiKey y header requerido
+    And header api_key = apiKey
     And header X-Transaction-Id = transactionId
 
     When method GET

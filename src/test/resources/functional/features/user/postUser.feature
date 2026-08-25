@@ -21,7 +21,8 @@ Feature: Crear usuario
     #reemplazar usuario dinámico
     * set requestBody.username = username
 
-    #header
+    # apiKey y header requerido
+    And header api_key = apiKey
     Given header X-Transaction-Id = transactionId
 
     #envia payload

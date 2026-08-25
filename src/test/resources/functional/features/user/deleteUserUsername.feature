@@ -15,7 +15,8 @@ Feature: Eliminar usuario
     # usuario existente a eliminar
     Given path username
 
-    # header requerido
+    # apiKey y header requerido
+    And header api_key = apiKey
     And header X-Transaction-Id = transactionId
 
     When method DELETE

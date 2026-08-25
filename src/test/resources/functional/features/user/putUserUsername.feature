@@ -21,8 +21,10 @@ Feature: Actualizar usuario
     # Usuario existente a actualizar
     Given path username
 
-    # Header requerido
+    # apiKey y header requerido
+    And header api_key = apiKey
     And header X-Transaction-Id = transactionId
+
     And request requestBody
     When method PUT
     Then status 200
