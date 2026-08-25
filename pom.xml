@@ -4,14 +4,53 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.example</groupId>
+    <groupId>com.inetum</groupId>
     <artifactId>reto03Inetum_petstore</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source> <!-- Versión del lenguaje Java permitida -->
+        <maven.compiler.target>17</maven.compiler.target> <!-- Bytecode generado para JVM 17 -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <karate.version>1.5.1</karate.version>
+        <surefire.version>3.5.3</surefire.version>
     </properties>
+
+    <!-- Librerías -->
+    <dependencies>
+        <!-- Source: https://mvnrepository.com/artifact/io.karatelabs/karate-junit5 -->
+        <dependency>
+            <groupId>io.karatelabs</groupId>
+            <artifactId>karate-junit5</artifactId>
+            <version>${karate.version}</version>
+            <scope>test</scope> <!-- Librería solo para Test, no se empaqueta para prod -->
+        </dependency>
+
+    </dependencies>
+
+    <!-- Herramientas que maven ejecuta -->
+    <build>
+        <plugins>
+
+            <plugin>
+                <!--  Interpreta .java a .class-->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.15.0</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <!-- ejecuta @test, durante la fase de test del ciclo de vida de maven -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire.version}</version>
+            </plugin>
+
+        </plugins>
+    </build>
 
 </project>
