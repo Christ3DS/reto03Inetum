@@ -1,0 +1,45 @@
+name: Karate API Tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      env:
+        description: Ambiente
+        required: true
+        default: integracion
+
+      tag:
+        description: Tag Karate
+        required: true
+        default: "@smoke"
+
+jobs:
+
+  test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Execute Karate Tests
+        run: |
+          mvn test \
+          -Dkarate.env=${{ inputs.env }} \
+          -Dkarate.options="--tags ${{ inputs.tag }}"
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+
+      - name: Upload Karate Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: karate-report
+          path: target/karate-reports/
